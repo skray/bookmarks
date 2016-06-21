@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
-import {Platform, NavParams, ViewController} from 'ionic-angular';
+import {Platform, NavParams, ViewController, Storage, SqlStorage} from 'ionic-angular';
+import {Book} from './Book';
 
 @Component({
   templateUrl: './build/pages/books/new-book.html'
 })
 export class NewBookModal {
+  public book:any = {};
 
   constructor(
       public platform: Platform,
@@ -16,5 +18,11 @@ export class NewBookModal {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  save() {
+    this.book.created = new Date()
+    this.book = new Book(this.book);
+    this.dismiss();
   }
 }

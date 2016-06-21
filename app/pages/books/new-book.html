@@ -8,27 +8,38 @@
       <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
     </button>
   </ion-buttons>
+  <ion-buttons end>
+    <button (click)="save()">
+      <span primary showWhen="ios">Save</span>
+      <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-toolbar>
 
 <ion-content>
   <ion-list>
 
     <ion-item>
-      <ion-label stacked>Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-label>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="book.name"></ion-input>
     </ion-item>
 
-  <ion-item>
-    <ion-label>Rating</ion-label>
-    <ion-select>
-      <ion-option value="0">0</ion-option>
-      <ion-option value="1">1</ion-option>
-      <ion-option value="2">2</ion-option>
-      <ion-option value="3">3</ion-option>
-      <ion-option value="4">4</ion-option>
-      <ion-option value="5">5</ion-option>
-    </ion-select>
-  </ion-item>
+    <ion-item>
+      <ion-label>Read</ion-label>
+      <ion-toggle [(ngModel)]="book.read"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Rating</ion-label>
+      <ion-select [(ngModel)]="book.rating">
+        <ion-option value="0">0</ion-option>
+        <ion-option value="1">1</ion-option>
+        <ion-option value="2">2</ion-option>
+        <ion-option value="3">3</ion-option>
+        <ion-option value="4">4</ion-option>
+        <ion-option value="5">5</ion-option>
+      </ion-select>
+    </ion-item>
 
   </ion-list>
 </ion-content>
