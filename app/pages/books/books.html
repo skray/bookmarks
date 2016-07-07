@@ -1,7 +1,7 @@
 <ion-content>
   <ion-card *ngFor="let book of books">
     <ion-card-content>
-      {{book.name}}
+      {{book.name}} <ion-icon *ngIf="book.read" name="checkmark-circle"></ion-icon>
     </ion-card-content>
   </ion-card>
   <button (click)="createNew()" fab fab-bottom fab-center>

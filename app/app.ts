@@ -3,7 +3,6 @@ import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {BooksPage} from './pages/books/books';
 
-
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
 })

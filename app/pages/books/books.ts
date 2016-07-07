@@ -2,6 +2,7 @@ import {Component} from '@angular/core'
 import {Modal, NavController} from 'ionic-angular'
 import {NewBookModal} from './new-book'
 import {Book} from './Book';
+import * as storager from '../../storager/storager';
 
 @Component({
   templateUrl: 'build/pages/books/books.html'
@@ -12,9 +13,9 @@ export class BooksPage {
 
   constructor(public nav: NavController) {
     var that = this;
-    Book.list().then((result)=> {
-      console.log(result);
-      this.books = result.res.rows;
+    storager.list().then((books)=> {
+      console.log(books);
+      this.books = books;
     });
   }
 
