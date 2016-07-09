@@ -1,0 +1,29 @@
+#
+# Configuration
+#
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - lib32stdc++6
+      - lib32z1
+
+branches:
+  except:
+    - master
+
+#
+# Build Lifecycle:
+#
+
+before_install:
+  - nvm use 5.5.0
+  - npm install -g cordova ionic
+  - ionic state clear
+
+install: npm install
+
+script:
+  - npm test                             # unit tests
