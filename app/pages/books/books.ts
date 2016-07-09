@@ -12,15 +12,20 @@ export class BooksPage {
   public books:any = [];
 
   constructor(public nav: NavController) {
-    var that = this;
-    storager.list().then((books)=> {
-      console.log(books);
-      this.books = books;
-    });
+    this.loadBooks();
   }
 
   createNew() {
     let modal = Modal.create(NewBookModal, {});
+    modal.onDismiss(data => {
+      this.loadBooks();
+    });
     this.nav.present(modal);
+  }
+
+  private loadBooks() {
+    storager.list().then((books)=> {
+      this.books = books;
+    });
   }
 }
