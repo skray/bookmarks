@@ -14,7 +14,6 @@ language: node_js
 #
 
 before_install:
-  - nvm use 5.5.0
   - npm install -g cordova ionic
   - ionic state clear
 
