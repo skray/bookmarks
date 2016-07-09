@@ -16,15 +16,33 @@
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
+    "browserify-istanbul": "^2.0.0",
+    "codecov.io": "^0.1.6",
     "del": "2.2.0",
     "gulp": "3.9.1",
+    "gulp-tslint": "^5.0.0",
+    "gulp-typescript": "^2.13.6",
     "gulp-watch": "4.3.5",
     "ionic-gulp-browserify-typescript": "^1.1.0",
     "ionic-gulp-fonts-copy": "^1.0.0",
     "ionic-gulp-html-copy": "^1.0.0",
     "ionic-gulp-sass-build": "^1.0.0",
     "ionic-gulp-scripts-copy": "^2.0.0",
-    "run-sequence": "1.1.5"
+    "isparta": "^4.0.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.1",
+    "karma-browserify": "^5.0.5",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.1.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-mocha-reporter": "^2.0.4",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "phantomjs-prebuilt": "^2.1.7",
+    "run-sequence": "1.1.5",
+    "traceur": "0.0.111",
+    "ts-node": "^0.9.3",
+    "tsify": "^1.0.0",
+    "tslint": "^3.13.0"
   },
   "name": "bookmarks",
   "description": "bookmarks: An Ionic project",
@@ -36,5 +54,10 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
+  "scripts": {
+    "karma": "gulp --gulpfile test/gulpfile.ts --cwd ./ karma-debug",
+    "postinstall": "typings install && cp test/karma-static/*.html node_modules/karma/static",
+    "test": "gulp --gulpfile test/gulpfile.ts --cwd ./ unit-test"
+  },
   "cordovaPlatforms": []
 }
