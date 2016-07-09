@@ -2,21 +2,13 @@
 # Configuration
 #
 
-sudo: required
-dist: trusty
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - lib32stdc++6
-      - lib32z1
-
 branches:
   except:
     - master
 
+language: node_js
+  node_js:
+    - "5.5"
 #
 # Build Lifecycle:
 #
