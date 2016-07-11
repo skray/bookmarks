@@ -4,9 +4,9 @@ import {Book} from './Book';
 import * as storager from '../../storager/storager';
 
 @Component({
-  templateUrl: './build/pages/books/new-book.html'
+  templateUrl: './build/pages/books/edit-book.html'
 })
-export class NewBookModal {
+export class EditBookModal {
   public book:any = {};
 
   constructor(
@@ -14,7 +14,11 @@ export class NewBookModal {
       public params: NavParams,
       public viewCtrl: ViewController
   ) {
-
+    if(params.get('book')) {
+      this.book = params.get('book');
+    } else {
+      this.book = new Book({});
+    }
   }
 
   dismiss() {
@@ -22,7 +26,6 @@ export class NewBookModal {
   }
 
   save() {
-    this.book = new Book(this.book);
     storager.saveBook(this.book);
     this.dismiss();
   }

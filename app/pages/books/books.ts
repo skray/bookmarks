@@ -1,6 +1,6 @@
 import {Component} from '@angular/core'
 import {Modal, NavController} from 'ionic-angular'
-import {NewBookModal} from './new-book'
+import {EditBookModal} from './edit-book'
 import {Book} from './Book';
 import * as storager from '../../storager/storager';
 
@@ -15,8 +15,8 @@ export class BooksPage {
     this.loadBooks();
   }
 
-  createNew() {
-    let modal = Modal.create(NewBookModal, {});
+  showEdit(book: Book) {
+    let modal = Modal.create(EditBookModal, {book: book});
     modal.onDismiss(data => {
       this.loadBooks();
     });

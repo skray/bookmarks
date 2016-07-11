@@ -1,10 +1,10 @@
 <ion-content>
-  <ion-card *ngFor="let book of books">
+  <ion-card *ngFor="let book of books" (click)="showEdit(book)">
     <ion-card-content>
       {{book.name}} <ion-icon *ngIf="book.read" name="checkmark-circle"></ion-icon>
     </ion-card-content>
   </ion-card>
-  <button (click)="createNew()" fab fab-bottom fab-center>
+  <button (click)="showEdit()" fab fab-bottom fab-center>
     <ion-icon name="add"></ion-icon>
   </button>
 </ion-content>
