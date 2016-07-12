@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Platform, NavParams, ViewController, Storage, SqlStorage} from 'ionic-angular';
+import {Platform, NavParams, ViewController} from 'ionic-angular';
 import {Book} from './Book';
 import * as storager from '../../storager/storager';
 
