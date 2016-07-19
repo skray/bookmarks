@@ -1,7 +1,9 @@
 <ion-content>
   <ion-card *ngFor="let book of books" (click)="showEdit(book)">
     <ion-card-content>
-      {{book.name}} <ion-icon *ngIf="book.read" name="checkmark-circle"></ion-icon>
+      <h1>{{book.name}} <ion-icon *ngIf="book.read" name="checkmark-circle"></ion-icon></h1>
+      {{book.rating}} - {{book.status}} - {{book.created | date:'shortDate'}}
+      <div>{{book.notes}}</div>
     </ion-card-content>
   </ion-card>
   <button (click)="showEdit()" fab fab-bottom fab-center>

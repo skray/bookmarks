@@ -25,6 +25,9 @@ export class BooksPage {
 
   private loadBooks() {
     storager.list().then((books)=> {
+      books.sort((a,b) => {
+        return a.created < b.created ? 1 : -1;
+      });
       this.books = books;
     });
   }
