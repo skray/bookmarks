@@ -20,7 +20,7 @@
   <ion-list>
 
     <ion-item>
-      <ion-label>Name</ion-label>
+      <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="book.name"></ion-input>
     </ion-item>
 
@@ -39,6 +39,23 @@
         <ion-option value="4">4</ion-option>
         <ion-option value="5">5</ion-option>
       </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select [(ngModel)]="book.status">
+        <ion-option>Haven't Looked</ion-option>
+        <ion-option>Overdrive Reserved</ion-option>
+        <ion-option>Kindle Available</ion-option>
+        <ion-option>In Library</ion-option>
+        <ion-option>Library Reserved</ion-option>
+        <ion-option>Can't Find</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Notes</ion-label>
+      <ion-textarea [(ngModel)]="book.notes"></ion-textarea>
     </ion-item>
 
   </ion-list>

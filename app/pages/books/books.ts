@@ -3,9 +3,11 @@ import {Modal, NavController} from 'ionic-angular'
 import {EditBookModal} from './edit-book'
 import {Book} from './Book';
 import * as storager from '../../storager/storager';
+import {Rating} from '../../rating/rating';
 
 @Component({
-  templateUrl: 'build/pages/books/books.html'
+  templateUrl: './build/pages/books/books.html',
+  directives: [Rating]
 })
 export class BooksPage {
 
@@ -25,6 +27,9 @@ export class BooksPage {
 
   private loadBooks() {
     storager.list().then((books)=> {
+      books.sort((a,b) => {
+        return a.created < b.created ? 1 : -1;
+      });
       this.books = books;
     });
   }
