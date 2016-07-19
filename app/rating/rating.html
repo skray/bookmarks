@@ -1,0 +1,4 @@
+<span *ngFor="let star of stars" [ngSwitch]="star">
+  <ion-icon *ngSwitchCase="true" name="star"></ion-icon>
+  <ion-icon *ngSwitchCase="false" name="star-outline"></ion-icon>
+</span>

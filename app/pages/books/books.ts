@@ -3,9 +3,11 @@ import {Modal, NavController} from 'ionic-angular'
 import {EditBookModal} from './edit-book'
 import {Book} from './Book';
 import * as storager from '../../storager/storager';
+import {Rating} from '../../rating/rating';
 
 @Component({
-  templateUrl: 'build/pages/books/books.html'
+  templateUrl: './build/pages/books/books.html',
+  directives: [Rating]
 })
 export class BooksPage {
 
