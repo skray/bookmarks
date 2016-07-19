@@ -1,13 +1,15 @@
 <ion-content>
-  <ion-card *ngFor="let book of books" (click)="showEdit(book)">
-    <ion-card-content>
-      <h1>{{book.name}} <ion-icon *ngIf="book.read" name="checkmark-circle"></ion-icon></h1>
-      <rating [value]="book.rating"></rating>
-      <div>{{book.status}} - {{book.created | date:'shortDate'}}</div>
-      <div>{{book.notes}}</div>
-    </ion-card-content>
-  </ion-card>
-  <button (click)="showEdit()" fab fab-bottom fab-center>
+  <button (click)="showEdit()" fab-center >
     <ion-icon name="add"></ion-icon>
   </button>
+  <ion-list>
+    <ion-card *ngFor="let book of books" (click)="showEdit(book)">
+      <ion-card-content>
+        <h1>{{book.name}} <ion-icon *ngIf="book.read" name="checkmark-circle"></ion-icon></h1>
+        <rating [value]="book.rating"></rating>
+        <div>{{book.status}} - {{book.created | date:'shortDate'}}</div>
+        <div>{{book.notes}}</div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>

@@ -13,7 +13,6 @@ export class Rating {
 
   ngOnInit() {
     for(let i=0; i<5; i++) {
-      console.log('i ' + i + ' value ' + this.value);
       this.stars.push(i<this.value);
     }
   }
