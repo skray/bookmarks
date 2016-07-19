@@ -1,4 +1,5 @@
 import {Storage, SqlStorage} from 'ionic-angular';
+import { Book } from '../pages/books/Book';
 
 let db;
 
@@ -8,11 +9,11 @@ function init() {
   }
 }
 
-function generateId(list) {
+function generateId(list) : string {
   return Math.random().toString(36).substr(2, 9);
 }
 
-export function saveBook(book) {
+export function saveBook(book:Book) {
   init();
   let books;
   list().then((result) => {
@@ -37,7 +38,7 @@ export function saveBook(book) {
   });
 }
 
-export function list() {
+export function list() : Promise<Array<Book>> {
   init();
   return db.get('books').then((data) => {
     if(!data) {

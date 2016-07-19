@@ -9,10 +9,7 @@ export class Book {
   read:Boolean;
   created:Date;
 
-  constructor(properties) {
-    this.name = properties.name;
-    this.rating = properties.rating;
-    this.read = properties.read;
+  constructor() {
     this.created = new Date();
   }
 }

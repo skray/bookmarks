@@ -7,7 +7,7 @@ import * as storager from '../../storager/storager';
   templateUrl: './build/pages/books/edit-book.html'
 })
 export class EditBookModal {
-  public book:any = {};
+  public book:Book;
 
   constructor(
       public platform: Platform,
@@ -17,7 +17,7 @@ export class EditBookModal {
     if(params.get('book')) {
       this.book = params.get('book');
     } else {
-      this.book = new Book({});
+      this.book = new Book();
     }
   }
 

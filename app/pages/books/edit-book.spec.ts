@@ -21,7 +21,7 @@ class MockClass {
 
 class MockNavParams {
   public get(name:string): any {
-    return new Book({});
+    return null;
   }
 }
 
