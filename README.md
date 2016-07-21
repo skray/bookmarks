@@ -7,3 +7,7 @@ out here for anyone who wants to try to use it, or to see an example Ionic 2 app
 
 ![list_screenshot](/screenshots/bookmarks_list.png)
 ![detail_screenshot](/screenshots/bookmarks_detail.png)
+
+## Installation
+
+Android APKs are available on the [releases page](https://github.com/skray/bookmarks/releases). If you do not want to install someone's random binary onto your phone, pull down the project, and then follow the [Ionic 2 installation guide](http://ionicframework.com/docs/v2/getting-started/installation/).
