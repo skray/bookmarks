@@ -6,3 +6,18 @@
 // These are the imports which make up the design of this app.
 // By default each design mode includes these shared imports.
 // App Shared Sass variables belong in app.variables.scss.
+*[pull-right] {
+  float:right;
+}
+
+*[gray] {
+  color: gray;
+}
+
+*[italic] {
+  font-style: italic;
+}
+
+*[smaller] {
+  font-size: smaller;
+}
