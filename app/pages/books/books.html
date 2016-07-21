@@ -1,15 +1,30 @@
-<ion-toolbar>
-  <ion-title>
-    Books
-  </ion-title>
-  <ion-buttons end>
-    <button (click)="showEdit()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-buttons>
-</ion-toolbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Books
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="showEdit()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="readFilterValue" (ionChange)="readFilterChanged($event)">
+      <ion-segment-button value="unread">
+        Unread
+      </ion-segment-button>
+      <ion-segment-button value="read">
+        Read
+      </ion-segment-button>
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-card *ngFor="let book of books" (click)="showEdit(book)">
+  <ion-card *ngFor="let book of filteredBooks" (click)="showEdit(book)">
     <ion-card-content>
       <h1>{{book.name}} <ion-icon *ngIf="book.read" name="checkmark-circle"></ion-icon></h1>
       <rating [value]="book.rating"></rating>
