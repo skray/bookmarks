@@ -11,3 +11,5 @@ Thumbs.db
 .idea
 coverage
 typings
+*.apk
+*.keystore
