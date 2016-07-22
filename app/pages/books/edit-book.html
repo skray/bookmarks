@@ -1,6 +1,6 @@
 <ion-toolbar>
   <ion-title>
-    Add Book
+    Edit Book
   </ion-title>
   <ion-buttons start>
     <button (click)="dismiss()">
@@ -32,12 +32,12 @@
     <ion-item>
       <ion-label>Rating</ion-label>
       <ion-select [(ngModel)]="book.rating">
-        <ion-option value="0">0</ion-option>
-        <ion-option value="1">1</ion-option>
-        <ion-option value="2">2</ion-option>
-        <ion-option value="3">3</ion-option>
-        <ion-option value="4">4</ion-option>
-        <ion-option value="5">5</ion-option>
+        <ion-option value="0">Literally poop</ion-option>
+        <ion-option value="1">Hated it</ion-option>
+        <ion-option value="2">Not a fan</ion-option>
+        <ion-option value="3">Ok</ion-option>
+        <ion-option value="4">Pretty good</ion-option>
+        <ion-option value="5">Holy crap!</ion-option>
       </ion-select>
     </ion-item>
 
@@ -63,4 +63,6 @@
     </ion-item>
 
   </ion-list>
+
+  <button *ngIf="!flags.creating" danger full (click)="promptForDelete()">DELETE</button>
 </ion-content>

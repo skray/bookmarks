@@ -13,18 +13,24 @@ function generateId(list) : string {
   return Math.random().toString(36).substr(2, 9);
 }
 
-export function saveBook(book:Book) {
+function findExistingIndex(books: Array<Book>, id:string) : number {
+    return books.findIndex((el) => {
+      return id && el.id === id
+    });
+}
+
+function saveBooks(books:Array<Book>) {
+  return db.set('books', JSON.stringify(books));
+}
+
+export function saveBook(book:Book) : Promise<any> {
   init();
-  let books;
-  list().then((result) => {
-    books = result;
+  return list().then((books) => {
     if(!books) {
       return [book];
     }
 
-    let existingIndex = books.findIndex((el) => {
-      return book.id && el.id === book.id
-    });
+    let existingIndex = findExistingIndex(books, book.id);
 
     if(existingIndex >= 0) {
       books[existingIndex] = book;
@@ -33,9 +39,19 @@ export function saveBook(book:Book) {
       books.push(book);
     }
     return books;
-  }).then((books) => {
-    return db.set('books', JSON.stringify(books));
-  });
+  }).then(saveBooks);
+}
+
+export function deleteBook(book: Book) : Promise<any> {
+  init();
+  return list().then((books) => {
+    let existingIndex = findExistingIndex(books, book.id);
+
+    if(existingIndex >= 0) {
+      books.splice(existingIndex);
+    }
+    return books;
+  }).then(saveBooks);
 }
 
 export function list() : Promise<Array<Book>> {
