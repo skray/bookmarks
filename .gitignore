@@ -13,3 +13,5 @@ coverage
 typings
 *.apk
 *.keystore
+
+app/pages/auth/app-key.ts
