@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Platform, NavParams, ViewController} from 'ionic-angular';
 import {Alert, NavController} from 'ionic-angular';
-import * as appKey from './app-key';
+import appKey from './app-key';
 import {InAppBrowser} from 'ionic-native';
 
 @Component({
