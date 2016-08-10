@@ -1,21 +1,37 @@
-import {Component} from '@angular/core'
-import {Modal, NavController} from 'ionic-angular'
-import {DropboxAuthModal} from '../auth/dropbox-auth'
+import {Component} from '@angular/core';
+import {Modal, NavController, Loading} from 'ionic-angular';
+import {DropboxAuthModal} from '../dropbox/dropbox-auth';
+import {Dropbox} from '../dropbox/dropbox';
 
 @Component({
-  templateUrl: './build/pages/books/backup-restore.html'
+  templateUrl: './build/pages/books/backup-restore.html',
+  providers: [Dropbox]
 })
 export class BackupRestorePage {
 
-  private authorized = false;
+  constructor(
+    public nav: NavController,
+    public dropbox: Dropbox
+  ) {
+    let loading = Loading.create({
+      content: 'Checking for authentication...'
+    });
+    this.nav.present(loading);
+    this.dropbox.isAlreadyAuthorized().then((isAuthorized) => {
+      loading.dismiss();
+      if(!isAuthorized) {
+        let modal = Modal.create(DropboxAuthModal);
+        modal.onDismiss(data => {
+          this.loadBackups();
+        });
+        this.nav.present(modal);
+      } else {
+        this.loadBackups();
+      }
+    });
+  }
 
-  constructor(public nav: NavController) {
-    if(!this.authorized) {
-      let modal = Modal.create(DropboxAuthModal);
-      modal.onDismiss(data => {
-        console.log(data);
-      });
-      this.nav.present(modal);
-    }
+  private loadBackups() {
+    console.log('finally authed');
   }
 }

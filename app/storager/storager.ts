@@ -63,3 +63,15 @@ export function list() : Promise<Array<Book>> {
     return JSON.parse(data);
   });
 }
+
+export function saveDropboxToken(token:string) {
+  init();
+  return db.set('dropboxToken', token);
+}
+
+export function getDropboxToken():Promise<string>{
+  init();
+  return db.get('dropboxToken').then((token) => {
+    return token;
+  });
+}

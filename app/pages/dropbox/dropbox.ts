@@ -1,32 +1,37 @@
-import {Component} from '@angular/core';
-import {Platform, NavParams, ViewController} from 'ionic-angular';
-import {Alert, NavController} from 'ionic-angular';
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
 import appKey from './app-key';
 import {InAppBrowser} from 'ionic-native';
+import * as storager from '../../storager/storager';
 
-@Component({
-  templateUrl: './build/pages/auth/dropbox-auth.html'
-})
-export class DropboxAuthModal {
+@Injectable()
+export class Dropbox {
 
   private authUrl:string;
   private redirectURI:string;
   private accessToken:string;
 
   constructor(
-      public platform: Platform,
-      public params: NavParams,
-      public viewCtrl: ViewController,
-      public nav: NavController
+    public http: Http
   ) {
     this.redirectURI = 'http://localhost';
     this.authUrl = 'https://www.dropbox.com/oauth2/authorize?client_id=' + appKey + '&redirect_uri=' + this.redirectURI + '&response_type=token';
   }
 
-  login(){
+  public isAlreadyAuthorized():Promise<boolean>{
+    return storager.getDropboxToken().then((token) => {
+      if(token) {
+        this.accessToken = token;
+        return true;
+      }
+      return false;
+    });
+  }
+
+  public login() {
     return new Promise((resolve, reject) => {
 
-      let browser = InAppBrowser.open(this.authUrl, '_blank');
+      let browser = InAppBrowser.open(this.authUrl, '_blank', 'location=no,zoom=no,hardwareback=no');
 
       browser.addEventListener('loadstart', (event) => {
 
@@ -41,7 +46,7 @@ export class DropboxAuthModal {
           browser.close();
           let token = event.url.split('=')[1].split('&')[0];
           this.accessToken = token;
-          resolve(event.url);
+          storager.saveDropboxToken(token).then(resolve);
         } else {
           reject("Could not authenticate");
         }
@@ -49,9 +54,5 @@ export class DropboxAuthModal {
       });
 
     });
-  }
-
-  dismiss() {
-    this.viewCtrl.dismiss();
   }
 }

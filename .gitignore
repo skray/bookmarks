@@ -14,4 +14,4 @@ typings
 *.apk
 *.keystore
 
-app/pages/auth/app-key.ts
+app/pages/dropbox/app-key.ts
