@@ -1,8 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http, Headers, Response} from '@angular/http';
 import appKey from './app-key';
 import {InAppBrowser} from 'ionic-native';
 import * as storager from '../../storager/storager';
+import {Entry} from './Entry';
+import {Observable} from 'rxjs'
+import 'rxjs/add/operator/map';
+import {Book} from '../books/Book';
 
 @Injectable()
 export class Dropbox {
@@ -54,5 +58,30 @@ export class Dropbox {
       });
 
     });
+  }
+
+  public list() : Observable<Response> {
+    let body = {path: ''};
+    let headers = new Headers();
+
+    headers.append('Authorization', 'Bearer ' + this.accessToken);
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('https://api.dropboxapi.com/2/files/list_folder', JSON.stringify(body), {headers: headers})
+      .map(res => res.json());
+  }
+
+  public write() : Observable<Response> {
+    let books: Array<Book>;
+    let formData = new FormData();
+    storager.list().then(function(books:Array<Book>) {
+      let now = new Date();
+      let backup = {date:now, books: books};
+      formData.append('file', new File([new Blob([JSON.stringify(backup)])], `backup-${now.toJSON()}`));
+
+      return this.http.post('https://api.dropboxapi.com/2/files/list_folder', JSON.stringify(body), {headers: headers})
+        .map(res => res.json());
+    })
+
   }
 }

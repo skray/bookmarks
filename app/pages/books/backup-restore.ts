@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Modal, NavController, Loading} from 'ionic-angular';
 import {DropboxAuthModal} from '../dropbox/dropbox-auth';
 import {Dropbox} from '../dropbox/dropbox';
+import {Response} from '@angular/http';
 
 @Component({
   templateUrl: './build/pages/books/backup-restore.html',
@@ -33,5 +34,15 @@ export class BackupRestorePage {
 
   private loadBackups() {
     console.log('finally authed');
+    this.dropbox.list().subscribe(
+      (files:Response) => {
+        console.log(files)
+      },
+      (error:Response) =>  {
+        console.log('Error')
+        console.log(error.status)
+        console.log(error.text())
+      }
+    );
   }
 }
