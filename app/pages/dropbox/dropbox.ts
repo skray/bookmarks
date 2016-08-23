@@ -3,7 +3,6 @@ import {Http, Headers, Response} from '@angular/http';
 import appKey from './app-key';
 import {InAppBrowser} from 'ionic-native';
 import * as storager from '../../storager/storager';
-import {Entry} from './Entry';
 import {Observable} from 'rxjs'
 import 'rxjs/add/operator/map';
 import {Book} from '../books/Book';
@@ -64,24 +63,35 @@ export class Dropbox {
     let body = {path: ''};
     let headers = new Headers();
 
-    headers.append('Authorization', 'Bearer ' + this.accessToken);
+    headers.append('Authorization', `Bearer ${this.accessToken}`);
     headers.append('Content-Type', 'application/json');
 
     return this.http.post('https://api.dropboxapi.com/2/files/list_folder', JSON.stringify(body), {headers: headers})
       .map(res => res.json());
   }
 
-  public write() : Observable<Response> {
-    let books: Array<Book>;
-    let formData = new FormData();
-    storager.list().then(function(books:Array<Book>) {
+  public write() {
+
+    storager.list().then((books:Array<Book>) => {
+
+      let headers = new Headers();
       let now = new Date();
+      let dropboxArgs = {path:`/backup-${now.toJSON()}.txt`, mode:'add', autorename:true, mute:true};
       let backup = {date:now, books: books};
-      formData.append('file', new File([new Blob([JSON.stringify(backup)])], `backup-${now.toJSON()}`));
-
-      return this.http.post('https://api.dropboxapi.com/2/files/list_folder', JSON.stringify(body), {headers: headers})
-        .map(res => res.json());
+      headers.append('Authorization',`Bearer ${this.accessToken}`);
+      headers.append('Dropbox-API-Arg',JSON.stringify(dropboxArgs));
+      headers.append('Content-Type','application/octet-stream');
+      return this.http.post('https://content.dropboxapi.com/2/files/upload', JSON.stringify(backup), {headers: headers})
+        .map(res => res.json()).subscribe(
+          (files:Response) => {
+            console.log(files)
+          },
+          (error:Response) =>  {
+            console.log('Error')
+            console.log(error.status)
+            console.log(error.text())
+          }
+        )
     })
-
   }
 }
