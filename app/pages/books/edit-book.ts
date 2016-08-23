@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Platform, NavParams, ViewController} from 'ionic-angular';
+import {Platform, NavParams, ViewController, AlertController} from 'ionic-angular';
 import {Book} from './Book';
 import * as storager from '../../storager/storager';
 import {Alert, NavController} from 'ionic-angular';
@@ -15,7 +15,8 @@ export class EditBookModal {
       public platform: Platform,
       public params: NavParams,
       public viewCtrl: ViewController,
-      public nav: NavController
+      public nav: NavController,
+      private alertCtrl: AlertController
   ) {
     if(params.get('book')) {
       this.book = params.get('book');
@@ -36,7 +37,7 @@ export class EditBookModal {
   }
 
   promptForDelete() {
-    let confirm = Alert.create({
+    let confirm = this.alertCtrl.create({
       title: 'Delete?',
       message: 'Really remove this book? This is for all of time, no take backs.',
       buttons: [
@@ -51,6 +52,6 @@ export class EditBookModal {
         }
       ]
     });
-    this.nav.present(confirm);
+    confirm.present();
   }
 }

@@ -6,6 +6,7 @@ import * as storager from '../../storager/storager';
 import {Observable} from 'rxjs'
 import 'rxjs/add/operator/map';
 import {Book} from '../books/Book';
+import {Entry} from './Entry';
 
 @Injectable()
 export class Dropbox {
@@ -59,7 +60,7 @@ export class Dropbox {
     });
   }
 
-  public list() : Observable<Response> {
+  public list() : Observable<Array<Entry>> {
     let body = {path: ''};
     let headers = new Headers();
 
@@ -67,7 +68,7 @@ export class Dropbox {
     headers.append('Content-Type', 'application/json');
 
     return this.http.post('https://api.dropboxapi.com/2/files/list_folder', JSON.stringify(body), {headers: headers})
-      .map(res => res.json());
+      .map(res =>  <Array<Entry>>res.json().entries);
   }
 
   public write() {

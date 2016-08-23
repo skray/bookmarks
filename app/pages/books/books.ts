@@ -1,5 +1,5 @@
 import {Component} from '@angular/core'
-import {Modal, NavController} from 'ionic-angular'
+import {ModalController, NavController} from 'ionic-angular'
 import {EditBookModal} from './edit-book'
 import {Book} from './Book';
 import * as storager from '../../storager/storager';
@@ -15,16 +15,16 @@ export class BooksPage {
   public filteredBooks: Array<Book>;
   public readFilterValue:string = 'unread';
 
-  constructor(public nav: NavController) {
+  constructor(public nav: NavController, public modalCtrl:ModalController) {
     this.loadBooks();
   }
 
   showEdit(book: Book) {
-    let modal = Modal.create(EditBookModal, {book: book});
-    modal.onDismiss(data => {
+    let modal = this.modalCtrl.create(EditBookModal, {book: book});
+    modal.onDidDismiss(data => {
       this.loadBooks();
     });
-    this.nav.present(modal);
+    modal.present();
   }
 
   readFilterChanged(event) {

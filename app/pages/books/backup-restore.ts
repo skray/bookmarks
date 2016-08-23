@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Modal, NavController, Loading} from 'ionic-angular';
+import {ModalController, NavController, LoadingController} from 'ionic-angular';
 import {DropboxAuthModal} from '../dropbox/dropbox-auth';
 import {Dropbox} from '../dropbox/dropbox';
 import {Response} from '@angular/http';
@@ -11,28 +11,35 @@ import {Entry} from '../dropbox/Entry';
 })
 export class BackupRestorePage {
 
-  private files:Array<Entry>;
+  private files:Array<Entry> = [];
 
   constructor(
     public nav: NavController,
-    public dropbox: Dropbox
+    public dropbox: Dropbox,
+    private loadingCtrl: LoadingController,
+    public modalCtrl: ModalController
   ) {
-    let loading = Loading.create({
-      content: 'Checking for authentication...'
+    let loading = this.loadingCtrl.create({
+      content: 'Checking for authentication...',
+      dismissOnPageChange: true
     });
-    this.nav.present(loading);
+
+    console.log('checking if authorized');
     this.dropbox.isAlreadyAuthorized().then((isAuthorized) => {
       loading.dismiss();
+      console.log(isAuthorized);
       if(!isAuthorized) {
-        let modal = Modal.create(DropboxAuthModal);
-        modal.onDismiss(data => {
+        let modal = this.modalCtrl.create(DropboxAuthModal);
+        modal.onDidDismiss(data => {
           this.loadBackups();
         });
-        this.nav.present(modal);
+        modal.present();
       } else {
         this.loadBackups();
       }
     });
+
+    loading.present();
   }
 
   public write() {
@@ -41,8 +48,9 @@ export class BackupRestorePage {
 
   private loadBackups() {
     this.dropbox.list().subscribe(
-      (files:Response) => {
+      (files:Array<Entry>) => {
         console.log(files)
+        this.files = files;
       },
       (error:Response) =>  {
         console.log('Error')
