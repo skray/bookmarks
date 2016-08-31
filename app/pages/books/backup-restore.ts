@@ -19,14 +19,18 @@ export class BackupRestorePage {
     private loadingCtrl: LoadingController,
     public modalCtrl: ModalController
   ) {
-    let loading = this.loadingCtrl.create({
-      content: 'Checking for authentication...',
-      dismissOnPageChange: true
-    });
+    // Causes weird overlay bug where auth modal overlays
+    // with opacity 0.01 - try this again later
+    // let loading = this.loadingCtrl.create({
+    //   content: 'Checking for authentication...',
+    //   dismissOnPageChange: true
+    // });
 
     console.log('checking if authorized');
+    // loading.present();
+
     this.dropbox.isAlreadyAuthorized().then((isAuthorized) => {
-      loading.dismiss();
+      // loading.dismiss();
       console.log(isAuthorized);
       if(!isAuthorized) {
         let modal = this.modalCtrl.create(DropboxAuthModal);
@@ -39,7 +43,6 @@ export class BackupRestorePage {
       }
     });
 
-    loading.present();
   }
 
   public write() {
