@@ -71,9 +71,19 @@ export class Dropbox {
       .map(res =>  <Array<Entry>>res.json().entries);
   }
 
-  public write() {
+  public write(): Observable<Entry> {
 
-    storager.list().then((books:Array<Book>) => {
+  //I need to take this idea:
+  // return getbooks.then(return httpcall)
+  // and figure out how to do that with observables
+
+   return Observable.fromPromise(storager.list())
+
+   bookListSubscription.subscribe(
+     (books:Array<Book>) => {
+
+     }
+   ) => {
 
       let headers = new Headers();
       let now = new Date();
@@ -83,16 +93,7 @@ export class Dropbox {
       headers.append('Dropbox-API-Arg',JSON.stringify(dropboxArgs));
       headers.append('Content-Type','application/octet-stream');
       return this.http.post('https://content.dropboxapi.com/2/files/upload', JSON.stringify(backup), {headers: headers})
-        .map(res => res.json()).subscribe(
-          (files:Response) => {
-            console.log(files)
-          },
-          (error:Response) =>  {
-            console.log('Error')
-            console.log(error.status)
-            console.log(error.text())
-          }
-        )
+        .map(res => <Entry>res.json())
     })
   }
 }

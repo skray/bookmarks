@@ -52,7 +52,6 @@ export class BackupRestorePage {
   private loadBackups() {
     this.dropbox.list().subscribe(
       (files:Array<Entry>) => {
-        console.log(files)
         this.files = files;
       },
       (error:Response) =>  {
