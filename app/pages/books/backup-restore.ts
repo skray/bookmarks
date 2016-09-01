@@ -46,7 +46,16 @@ export class BackupRestorePage {
   }
 
   public write() {
-    this.dropbox.write()
+    this.dropbox.write().subscribe(
+      (file:Entry) => {
+        this.files.push(file);
+      },
+      (error:Response) =>  {
+        console.log('Error')
+        console.log(error.status)
+        console.log(error.text())
+      }
+    )
   }
 
   private loadBackups() {

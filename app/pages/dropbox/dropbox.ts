@@ -76,24 +76,18 @@ export class Dropbox {
   //I need to take this idea:
   // return getbooks.then(return httpcall)
   // and figure out how to do that with observables
-
-   return Observable.fromPromise(storager.list())
-
-   bookListSubscription.subscribe(
-     (books:Array<Book>) => {
-
-     }
-   ) => {
-
-      let headers = new Headers();
-      let now = new Date();
-      let dropboxArgs = {path:`/backup-${now.toJSON()}.txt`, mode:'add', autorename:true, mute:true};
-      let backup = {date:now, books: books};
-      headers.append('Authorization',`Bearer ${this.accessToken}`);
-      headers.append('Dropbox-API-Arg',JSON.stringify(dropboxArgs));
-      headers.append('Content-Type','application/octet-stream');
-      return this.http.post('https://content.dropboxapi.com/2/files/upload', JSON.stringify(backup), {headers: headers})
-        .map(res => <Entry>res.json())
-    })
+    return Observable.fromPromise(storager.list())
+      .map((books:Array<Book>) => {
+          let headers = new Headers();
+          let now = new Date();
+          let dropboxArgs = {path:`/backup-${now.toJSON()}.txt`, mode:'add', autorename:true, mute:true};
+          let backup = {date:now, books: books};
+          headers.append('Authorization',`Bearer ${this.accessToken}`);
+          headers.append('Dropbox-API-Arg',JSON.stringify(dropboxArgs));
+          headers.append('Content-Type','application/octet-stream');
+          return {headers: headers, data: backup}
+      })
+      .switchMap((struct) => this.http.post('https://content.dropboxapi.com/2/files/upload', JSON.stringify(struct.data), {headers: struct.headers}))
+      .map(res => <Entry>res.json())
   }
 }
