@@ -29,7 +29,7 @@ import {BackupRestorePage} from './pages/books/backup-restore';
 })
 export class MyApp {
 
-  private rootPage = BooksPage;
+  private rootPage = BackupRestorePage;
   private booksPage = BooksPage;
   private backupRestorePage = BackupRestorePage;
 

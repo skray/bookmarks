@@ -7,6 +7,7 @@ import {Observable} from 'rxjs'
 import 'rxjs/add/operator/map';
 import {Book} from '../books/Book';
 import {Entry} from './Entry';
+import {Backup} from './Backup';
 
 @Injectable()
 export class Dropbox {
@@ -72,16 +73,12 @@ export class Dropbox {
   }
 
   public write(): Observable<Entry> {
-
-  //I need to take this idea:
-  // return getbooks.then(return httpcall)
-  // and figure out how to do that with observables
     return Observable.fromPromise(storager.list())
       .map((books:Array<Book>) => {
           let headers = new Headers();
           let now = new Date();
           let dropboxArgs = {path:`/backup-${now.toJSON()}.txt`, mode:'add', autorename:true, mute:true};
-          let backup = {date:now, books: books};
+          let backup = new Backup(books);
           headers.append('Authorization',`Bearer ${this.accessToken}`);
           headers.append('Dropbox-API-Arg',JSON.stringify(dropboxArgs));
           headers.append('Content-Type','application/octet-stream');
@@ -89,5 +86,16 @@ export class Dropbox {
       })
       .switchMap((struct) => this.http.post('https://content.dropboxapi.com/2/files/upload', JSON.stringify(struct.data), {headers: struct.headers}))
       .map(res => <Entry>res.json())
+  }
+
+  public download(fileName : string) {
+    let body = {path: ''};
+    let headers = new Headers();
+
+    headers.append('Authorization', `Bearer ${this.accessToken}`);
+    headers.append('Dropbox-API-Arg', JSON.stringify({path: `/${fileName}`}));
+
+    return this.http.post('https://content.dropboxapi.com/2/files/download', null, {headers: headers})
+      .map(res => <Backup>res.json())
   }
 }

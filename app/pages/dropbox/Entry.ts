@@ -6,4 +6,5 @@ export class Entry {
   id:string;
   ".tag":string;
   name:string;
+  client_modified:Date;
 }

@@ -8,12 +8,13 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-  <button block (click)="write()">Backup current data</button>
+<ion-content padding>
+  <button block (click)="write()" margin-vertical>Back Up current data</button>
 
+  <h2 margin-left>Previous Backups</h2>
   <ion-list>
-    <ion-item *ngFor="let file of files">
-      {{file.name}}
+    <ion-item *ngFor="let file of files" (click)="viewDetail(file)">
+      {{file.client_modified | date:'medium'}}
     </ion-item>
   </ion-list>
 </ion-content>
