@@ -1,10 +1,11 @@
 import {Component} from '@angular/core'
-import {ModalController, NavController, NavParams} from 'ionic-angular'
+import {ModalController, NavController, LoadingController, NavParams} from 'ionic-angular'
 import {Backup} from '../dropbox/Backup'
 import {Dropbox} from '../dropbox/dropbox'
 import {Response} from '@angular/http'
 import {DropboxAuthModal} from '../dropbox/dropbox-auth'
-import {Rating} from '../../rating/rating';
+import {Rating} from '../../rating/rating'
+import * as storager from '../../storager/storager'
 
 @Component({
   templateUrl: './build/pages/books/edit-backup.html',
@@ -18,6 +19,7 @@ export class EditBackupPage {
   constructor(
     public dropbox: Dropbox,
     public navParams: NavParams,
+    private loadingCtrl: LoadingController,
     public modalCtrl: ModalController
   ) {
     let file = this.navParams.get('file')
@@ -32,6 +34,24 @@ export class EditBackupPage {
       } else {
         this.loadFile(file)
       }
+    })
+  }
+
+  public restore() {
+    let loading = this.loadingCtrl.create({
+      content: 'Restoring...',
+      dismissOnPageChange: true
+    })
+    loading.present()
+
+    let restored = this.backup.books.reduce((prev, book) => {
+      return prev.then(() => {
+        return storager.saveBook(book)
+      })
+    }, new Promise((resolve) => resolve()))
+
+    restored.then(() => {
+      loading.dismiss()
     })
   }
 

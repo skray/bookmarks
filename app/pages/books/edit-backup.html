@@ -11,7 +11,7 @@
 <ion-content padding>
   <div *ngIf="backup">
     <div flex>
-      <button half>Restore Items</button>
+      <button half (click)="restore()">Restore Items</button>
       <button half danger>Delete Backup</button>
     </div>
 
