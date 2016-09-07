@@ -88,7 +88,18 @@ export class Dropbox {
       .map(res => <Entry>res.json())
   }
 
-  public download(fileName : string) {
+  public delete(file:Entry): Observable<Entry> {
+    let body = {path: `/${file.name}`};
+    let headers = new Headers();
+
+    headers.append('Authorization', `Bearer ${this.accessToken}`);
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('https://api.dropboxapi.com/2/files/delete', JSON.stringify(body), {headers: headers})
+      .map(res =>  <Entry>res.json());
+  }
+
+  public download(fileName : string): Observable<Backup> {
     let body = {path: ''};
     let headers = new Headers();
 

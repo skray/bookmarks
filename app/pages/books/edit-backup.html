@@ -12,7 +12,7 @@
   <div *ngIf="backup">
     <div flex>
       <button half (click)="restore()">Restore Items</button>
-      <button half danger>Delete Backup</button>
+      <button half danger (click)="delete()">Delete Backup</button>
     </div>
 
     <h1>{{backup.books.length}} books <span gray italic smallerer>{{backup.date | date:'medium'}}</span></h1>

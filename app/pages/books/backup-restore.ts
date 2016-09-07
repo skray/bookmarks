@@ -20,6 +20,10 @@ export class BackupRestorePage {
     private loadingCtrl: LoadingController,
     public modalCtrl: ModalController
   ) {
+
+  }
+
+  ionViewDidEnter() {
     let loading = this.loadingCtrl.create({
       content: 'Checking for authentication...',
       dismissOnPageChange: true
@@ -42,9 +46,15 @@ export class BackupRestorePage {
   }
 
   public write() {
+    let loading = this.loadingCtrl.create({
+      content: 'Backing up...',
+      dismissOnPageChange: true
+    })
+    loading.present()
     this.dropbox.write().subscribe(
       (file:Entry) => {
-        this.files.push(file)
+        loading.dismiss()
+        this.files.splice(0,0,file)
       },
       (error:Response) =>  {
         console.log('Error')
