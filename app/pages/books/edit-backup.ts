@@ -52,11 +52,13 @@ export class EditBackupPage {
             content: 'Deleting...',
             dismissOnPageChange: true
           })
-          loading.present()
+          // loading.present()
+
+          let navTransition = confirm.dismiss()
 
           this.dropbox.delete(this.file).subscribe(
             (entry:Entry) => {
-              this.navCtrl.pop()
+              navTransition.then(() => this.navCtrl.pop())
             },
             (error:Response) =>  {
               console.log('Error')
