@@ -45,9 +45,16 @@ export class EditBookModal {
         {
           text: 'Yes',
           handler: () => {
+            let navTransition = confirm.dismiss();
+
             storager.deleteBook(this.book).then(() => {
-              this.dismiss();
+              navTransition.then(() => {
+                this.dismiss();
+              });
+
             });
+            return false;
+
           }
         }
       ]
