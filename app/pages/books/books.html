@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle><ion-icon name="menu"></ion-icon></button>
+    </ion-buttons>
     <ion-title>
       Books
     </ion-title>
@@ -24,18 +27,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card *ngFor="let book of filteredBooks" (click)="showEdit(book)">
-    <ion-card-content>
-      <h1><ion-icon *ngIf="book.read" name="checkmark-circle" smaller gray></ion-icon> {{book.name}}</h1>
-      <div *ngIf="book.read">
-        <rating [value]="book.rating"></rating>
-        <span pull-right gray italic>Added {{book.created | date:'shortDate'}}</span>
-      </div>
-      <div *ngIf="!book.read">
-        {{book.status}}
-        <span pull-right gray italic>Added {{book.created | date:'shortDate'}}</span>
-      </div>
-      <div *ngIf="book.notes" padding-top>{{book.notes}}</div>
-    </ion-card-content>
-  </ion-card>
+  <div *ngIf="filteredBooks">
+    <book-list [books]="filteredBooks" (onDismiss)="loadBooks()"></book-list>    
+  </div>
 </ion-content>

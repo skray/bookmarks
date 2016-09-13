@@ -48,7 +48,7 @@ export function deleteBook(book: Book) : Promise<any> {
     let existingIndex = findExistingIndex(books, book.id);
 
     if(existingIndex >= 0) {
-      books.splice(existingIndex);
+      books.splice(existingIndex,1);
     }
     return books;
   }).then(saveBooks);
@@ -61,5 +61,17 @@ export function list() : Promise<Array<Book>> {
       return [];
     }
     return JSON.parse(data);
+  });
+}
+
+export function saveDropboxToken(token:string) {
+  init();
+  return db.set('dropboxToken', token);
+}
+
+export function getDropboxToken():Promise<string>{
+  init();
+  return db.get('dropboxToken').then((token) => {
+    return token;
   });
 }
