@@ -48,7 +48,7 @@ export function deleteBook(book: Book) : Promise<any> {
     let existingIndex = findExistingIndex(books, book.id);
 
     if(existingIndex >= 0) {
-      books.splice(existingIndex);
+      books.splice(existingIndex,1);
     }
     return books;
   }).then(saveBooks);
