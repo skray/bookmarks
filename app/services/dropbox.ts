@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
 import appKey from './app-key';
 import {InAppBrowser} from 'ionic-native';
-import * as storager from '../../storager/storager';
 import {Observable} from 'rxjs'
 import 'rxjs/add/operator/map';
-import {Book} from '../books/Book';
-import {Entry} from './Entry';
-import {Backup} from './Backup';
+
+import * as storager from './storager';
+import {Book} from '../models/Book';
+import {Entry} from '../models/Entry';
+import {Backup} from '../models/Backup';
 
 @Injectable()
 export class Dropbox {

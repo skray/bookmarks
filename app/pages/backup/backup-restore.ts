@@ -1,13 +1,14 @@
 import {Component} from '@angular/core'
 import {ModalController, NavController, LoadingController, NavParams} from 'ionic-angular'
-import {DropboxAuthModal} from '../dropbox/dropbox-auth'
-import {Dropbox} from '../dropbox/dropbox'
 import {Response} from '@angular/http'
-import {Entry} from '../dropbox/Entry'
+
+import {DropboxAuthModal} from '../dropbox-auth/dropbox-auth'
+import {Dropbox} from '../../services/dropbox'
+import {Entry} from '../../models/Entry'
 import {EditBackupPage} from './edit-backup'
 
 @Component({
-  templateUrl: './build/pages/books/backup-restore.html',
+  templateUrl: './build/pages/backup/backup-restore.html',
   providers: [Dropbox]
 })
 export class BackupRestorePage {

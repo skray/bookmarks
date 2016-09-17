@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../books/Book';
+import { Book } from './Book';
 
 @Injectable()
 export class Backup {

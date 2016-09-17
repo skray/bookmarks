@@ -1,5 +1,5 @@
 import {Storage, SqlStorage} from 'ionic-angular';
-import { Book } from '../pages/books/Book';
+import { Book } from '../models/Book';
 
 let db;
 

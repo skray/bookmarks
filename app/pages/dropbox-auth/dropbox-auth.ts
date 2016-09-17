@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {Platform, NavParams, ViewController} from 'ionic-angular';
 import {NavController} from 'ionic-angular';
-import {Dropbox} from './dropbox';
+import {Dropbox} from '../../services/dropbox';
 
 @Component({
-  templateUrl: './build/pages/dropbox/dropbox-auth.html',
+  templateUrl: './build/pages/dropbox-auth/dropbox-auth.html',
   providers: [Dropbox]
 })
 export class DropboxAuthModal {
