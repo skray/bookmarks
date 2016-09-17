@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Platform, ionicBootstrap, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {BooksPage} from './pages/books/books';
-import {BackupRestorePage} from './pages/books/backup-restore';
+import {BackupRestorePage} from './pages/backup/backup-restore';
 
 @Component({
   template: `

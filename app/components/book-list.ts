@@ -1,12 +1,12 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core'
 import {ModalController} from 'ionic-angular'
-import {Book} from './Book'
-import {EditBookModal} from './edit-book'
-import {Rating} from '../../rating/rating'
+import {Book} from '../models/Book'
+import {EditBookModal} from '../pages/books/edit-book'
+import {Rating} from '../components/rating'
 
 @Component({
   selector: 'book-list',
-  templateUrl: './build/pages/books/book-list.html',
+  templateUrl: './build/components/book-list.html',
   directives: [Rating]
 })
 export class BookList {

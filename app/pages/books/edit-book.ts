@@ -1,8 +1,8 @@
+import {Alert, NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {Platform, NavParams, ViewController, AlertController} from 'ionic-angular';
-import {Book} from './Book';
-import * as storager from '../../storager/storager';
-import {Alert, NavController} from 'ionic-angular';
+import {Book} from '../../models/Book';
+import * as storager from '../../services/storager';
 
 @Component({
   templateUrl: './build/pages/books/edit-book.html'

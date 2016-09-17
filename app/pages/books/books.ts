@@ -1,9 +1,9 @@
 import {Component} from '@angular/core'
 import {ModalController, NavController} from 'ionic-angular'
 import {EditBookModal} from './edit-book'
-import {Book} from './Book'
-import * as storager from '../../storager/storager'
-import {BookList} from './book-list'
+import {Book} from '../../models/Book'
+import * as storager from '../../services/storager'
+import {BookList} from '../../components/book-list'
 
 @Component({
   templateUrl: './build/pages/books/books.html',

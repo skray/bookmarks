@@ -3,7 +3,7 @@ import {Platform, NavParams, ViewController} from 'ionic-angular';
 
 @Component({
   selector: 'rating',
-  templateUrl: './build/rating/rating.html'
+  templateUrl: './build/components/rating.html'
 })
 export class Rating {
   @Input()

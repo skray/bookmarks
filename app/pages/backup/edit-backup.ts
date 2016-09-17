@@ -1,15 +1,16 @@
 import {Component} from '@angular/core'
 import {ModalController, NavController, LoadingController, NavParams, AlertController} from 'ionic-angular'
-import {Backup} from '../dropbox/Backup'
-import {Dropbox} from '../dropbox/dropbox'
 import {Response} from '@angular/http'
-import {DropboxAuthModal} from '../dropbox/dropbox-auth'
-import {Rating} from '../../rating/rating'
-import {Entry} from '../dropbox/Entry'
-import * as storager from '../../storager/storager'
+
+import {Backup} from '../../models/Backup'
+import {Dropbox} from '../../services/dropbox'
+import {DropboxAuthModal} from '../dropbox-auth/dropbox-auth'
+import {Rating} from '../../components/rating'
+import {Entry} from '../../models/Entry'
+import * as storager from '../../services/storager'
 
 @Component({
-  templateUrl: './build/pages/books/edit-backup.html',
+  templateUrl: './build/pages/backup/edit-backup.html',
   providers: [Dropbox],
   directives: [Rating]
 })
