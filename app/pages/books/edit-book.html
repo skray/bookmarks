@@ -23,7 +23,7 @@
 
     <ion-item>
       <ion-label floating>Name</ion-label>
-      <ion-input type="text" [(ngModel)]="book.name"></ion-input>
+      <ion-input autocomplete="on" type="text" [(ngModel)]="book.name"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -61,7 +61,7 @@
 
     <ion-item>
       <ion-label floating>Notes</ion-label>
-      <ion-textarea [(ngModel)]="book.notes"></ion-textarea>
+      <ion-textarea autocomplete="on" [(ngModel)]="book.notes"></ion-textarea>
     </ion-item>
 
   </ion-list>
