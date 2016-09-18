@@ -14,4 +14,4 @@ typings
 *.apk
 *.keystore
 
-app-key.ts
+api-keys.ts

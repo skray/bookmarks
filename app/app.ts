@@ -3,6 +3,7 @@ import {Platform, ionicBootstrap, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {BooksPage} from './pages/books/books';
 import {BackupRestorePage} from './pages/backup/backup-restore';
+import {SearchBooksPage} from './pages/books/search-books';
 
 @Component({
   template: `
@@ -29,9 +30,10 @@ import {BackupRestorePage} from './pages/backup/backup-restore';
 })
 export class MyApp {
 
-  private rootPage = BooksPage;
+  private rootPage = SearchBooksPage;
   private booksPage = BooksPage;
   private backupRestorePage = BackupRestorePage;
+  private searchBooksPage = SearchBooksPage;
 
   constructor(
     private platform:Platform,
