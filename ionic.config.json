@@ -1,5 +1,9 @@
 {
   "name": "bookmarks",
   "app_id": "",
-  "v2": true
+  "v2": true,
+  "proxies": [{
+    "path": "/search/",
+    "proxyUrl": "https://www.goodreads.com/"
+  }]
 }
