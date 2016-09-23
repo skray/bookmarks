@@ -1,1 +1,29 @@
-seach
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle><ion-icon name="menu"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>
+      Search
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="showEdit()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let book of results">
+    <ion-card-content flex>
+      <img class="book-result-img" half *ngIf="book.volumeInfo.imageLinks" src="{{book.volumeInfo.imageLinks.smallThumbnail}}" alt="" />
+      <div half>
+        <h3>{{book.volumeInfo.title}}</h3>
+        <p>
+          <span *ngIf="book.volumeInfo.authors && book.volumeInfo.authors.length">{{book.volumeInfo.authors[0]}}</span>
+          <span gray italic>{{book.volumeInfo.publishedDate}}</span>
+        </p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

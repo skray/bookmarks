@@ -6,6 +6,9 @@
 // These are the imports which make up the design of this app.
 // By default each design mode includes these shared imports.
 // App Shared Sass variables belong in app.variables.scss.
+
+//global
+
 [pull-right] {
   float:right;
 }
@@ -33,4 +36,11 @@
 
 [half] {
   flex: 0 1 auto;
+}
+
+// search-books
+
+.book-result-img {
+  height: 8rem;
+  width: auto;
 }
