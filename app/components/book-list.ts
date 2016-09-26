@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core'
-import {ModalController} from 'ionic-angular'
+import {NavController} from 'ionic-angular'
 import {Book} from '../models/Book'
-import {EditBookModal} from '../pages/books/edit-book'
+import {EditBookPage} from '../pages/books/edit-book'
 import {Rating} from '../components/rating'
 
 @Component({
@@ -13,13 +13,9 @@ export class BookList {
   @Input() books: Array<Book>
   @Output() onDismiss = new EventEmitter<any>();
 
-  constructor(public modalCtrl:ModalController) { }
+  constructor(public navCtrl:NavController) { }
 
   showEdit(book: Book) {
-    let modal = this.modalCtrl.create(EditBookModal, {book: book})
-    modal.onDidDismiss(data => {
-      this.onDismiss.emit('dismissed')
-    })
-    modal.present()
+    this.navCtrl.push(EditBookPage, {book: book})
   }
 }

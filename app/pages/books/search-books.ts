@@ -1,8 +1,10 @@
 import {Component} from '@angular/core'
 import {Response} from '@angular/http'
+import {NavController} from 'ionic-angular';
 
 import {GoogleBooks} from '../../services/googlebooks'
 import {GoogleBookSearchResult} from '../../models/GoogleBookSearchResult'
+import {EditBookPage} from './edit-book'
 
 @Component({
   templateUrl: './build/pages/books/search-books.html',
@@ -15,7 +17,8 @@ export class SearchBooksPage {
   public searchStr:string
 
   constructor(
-    public googlebooks:GoogleBooks
+    public googlebooks:GoogleBooks,
+    public navCtrl:NavController
   ) {
     this.results = new Array<GoogleBookSearchResult>()
   }
@@ -43,6 +46,10 @@ export class SearchBooksPage {
 
   public searchStrEmpty() {
     return typeof this.searchStr !== 'string' || this.searchStr.length <= 0
+  }
+
+  public choose(book:GoogleBookSearchResult) {
+    this.navCtrl.push(EditBookPage, {book: book})
   }
 
 }

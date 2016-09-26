@@ -1,21 +1,19 @@
 import {Alert, NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
-import {Platform, NavParams, ViewController, AlertController} from 'ionic-angular';
+import {NavParams, AlertController} from 'ionic-angular';
 import {Book} from '../../models/Book';
 import * as storager from '../../services/storager';
 
 @Component({
   templateUrl: './build/pages/books/edit-book.html'
 })
-export class EditBookModal {
+export class EditBookPage {
   public book:Book;
   public flags = {creating: true};
 
   constructor(
-      public platform: Platform,
       public params: NavParams,
-      public viewCtrl: ViewController,
-      public nav: NavController,
+      public navCtrl: NavController,
       private alertCtrl: AlertController
   ) {
     if(params.get('book')) {
@@ -27,7 +25,7 @@ export class EditBookModal {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    this.navCtrl.popToRoot();
   }
 
   save() {

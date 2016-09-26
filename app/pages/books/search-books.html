@@ -17,7 +17,7 @@
   <div *ngIf="!searching && !searchStrEmpty() && results.length == 0" largerer text-center margin>
     No results
   </div>
-  <ion-card class="book-card"*ngFor="let book of results">
+  <ion-card class="book-card"*ngFor="let book of results" (click)="choose(book)">
     <ion-card-content class="book-card-content">
       <img class="book-result-img" *ngIf="book.thumbnailUrl" src="{{book.thumbnailUrl}}" alt="" />
       <div class="book-result-img-alt" *ngIf="!book.thumbnailUrl">?</div>

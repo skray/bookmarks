@@ -5,7 +5,6 @@ import {Platform, ionicBootstrap, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {BooksPage} from './pages/books/books';
 import {BackupRestorePage} from './pages/backup/backup-restore';
-import {SearchBooksPage} from './pages/books/search-books';
 
 import { provide } from '@angular/core';
 provide(Window, { useValue: window });
@@ -35,10 +34,9 @@ provide(Window, { useValue: window });
 })
 export class MyApp {
 
-  private rootPage = SearchBooksPage;
+  private rootPage = BooksPage;
   private booksPage = BooksPage;
   private backupRestorePage = BackupRestorePage;
-  private searchBooksPage = SearchBooksPage;
 
   constructor(
     private platform:Platform,
