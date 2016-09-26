@@ -14,8 +14,11 @@
   <div *ngIf="!searching && searchStrEmpty() && results.length == 0" largerer text-center margin>
     Search by title or author
   </div>
-  <div *ngIf="!searching && !searchStrEmpty() && results.length == 0" largerer text-center margin>
+  <div *ngIf="!searching && !errored && !searchStrEmpty() && results.length == 0" largerer text-center margin>
     No results
+  </div>
+  <div *ngIf="!searching && errored" largerer text-center margin>
+    Error searching for books. Please try again.
   </div>
   <ion-card class="book-card"*ngFor="let book of results" (click)="choose(book)">
     <ion-card-content class="book-card-content">
