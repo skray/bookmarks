@@ -18,7 +18,9 @@ export class BooksPage {
 
   constructor(
     public navCtrl: NavController
-  ) {
+  ) {}
+
+  ionViewDidEnter() {
     this.loadBooks()
   }
 
