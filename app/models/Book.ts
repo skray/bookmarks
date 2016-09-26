@@ -4,14 +4,19 @@ import { Injectable } from '@angular/core';
 export class Book {
 
   id:string;
-  name:string;
+  title:string;
+  author:string;
+  description:string;
+  publishedYear:string;
+  thumbnailUrl:string;
   status:string;
   notes:string;
   rating:number;
   read:boolean;
   created:Date;
 
-  constructor() {
+  constructor(fields?:any) {
+    Object.assign(this,fields)
     this.created = new Date();
   }
 }

@@ -5,6 +5,7 @@ import {NavController} from 'ionic-angular';
 import {GoogleBooks} from '../../services/googlebooks'
 import {GoogleBookSearchResult} from '../../models/GoogleBookSearchResult'
 import {EditBookPage} from './edit-book'
+import {Book} from '../../models/Book'
 
 @Component({
   templateUrl: './build/pages/books/search-books.html',
@@ -49,7 +50,7 @@ export class SearchBooksPage {
   }
 
   public choose(book:GoogleBookSearchResult) {
-    this.navCtrl.push(EditBookPage, {book: book})
+    this.navCtrl.push(EditBookPage, {book: new Book(book)})
   }
 
 }
