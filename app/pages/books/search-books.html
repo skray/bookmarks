@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle><ion-icon name="menu"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>
+      Add book
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="search-books">
+  <ion-searchbar [(ngModel)]="searchStr" (ionInput)="searchBooks($event)"></ion-searchbar>
+  <span [ngClass]="{'hidden':!searching}"><ion-spinner name="dots"></ion-spinner></span>
+  <div *ngIf="!searching && searchStrEmpty() && results.length == 0" largerer text-center margin>
+    Search by title or author
+  </div>
+  <div *ngIf="!searching && !searchStrEmpty() && results.length == 0" largerer text-center margin>
+    No results
+  </div>
+  <ion-card class="book-card"*ngFor="let book of results" (click)="choose(book)">
+    <ion-card-content class="book-card-content">
+      <img class="book-result-img" *ngIf="book.thumbnailUrl" src="{{book.thumbnailUrl}}" alt="" />
+      <div class="book-result-img-alt" *ngIf="!book.thumbnailUrl">?</div>
+      <div class="book-info">
+        <h2>{{book.title}}</h2>
+        <p>{{book.author}}</p>
+        <p gray italic>{{book.publishedYear}}</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

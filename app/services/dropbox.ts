@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
-import appKey from './app-key';
+import {dropboxKey} from './api-keys';
 import {InAppBrowser} from 'ionic-native';
 import {Observable} from 'rxjs'
 import 'rxjs/add/operator/map';
@@ -21,7 +21,7 @@ export class Dropbox {
     public http: Http
   ) {
     this.redirectURI = 'http://localhost';
-    this.authUrl = 'https://www.dropbox.com/oauth2/authorize?client_id=' + appKey + '&redirect_uri=' + this.redirectURI + '&response_type=token';
+    this.authUrl = 'https://www.dropbox.com/oauth2/authorize?client_id=' + dropboxKey + '&redirect_uri=' + this.redirectURI + '&response_type=token';
   }
 
   public isAlreadyAuthorized():Promise<boolean>{

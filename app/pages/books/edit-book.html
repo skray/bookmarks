@@ -22,8 +22,24 @@
   <ion-list>
 
     <ion-item>
-      <ion-label floating>Name</ion-label>
-      <ion-input autocomplete="on" type="text" [(ngModel)]="book.name"></ion-input>
+      <img item-left src="{{book.thumbnailUrl}}" />
+      <ion-label floating>Title</ion-label>
+      <ion-input autocomplete="on" type="text" [(ngModel)]="book.title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Author</ion-label>
+      <ion-input autocomplete="on" type="text" [(ngModel)]="book.author"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Published</ion-label>
+      <ion-input autocomplete="on" type="text" [(ngModel)]="book.publishedYear"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-textarea autocomplete="on" [(ngModel)]="book.description"></ion-textarea>
     </ion-item>
 
     <ion-item>

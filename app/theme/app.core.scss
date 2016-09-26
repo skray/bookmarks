@@ -6,6 +6,9 @@
 // These are the imports which make up the design of this app.
 // By default each design mode includes these shared imports.
 // App Shared Sass variables belong in app.variables.scss.
+
+// Additional utility attributes, see http://ionicframework.com/docs/v2/theming/css-utilities/
+
 [pull-right] {
   float:right;
 }
@@ -26,11 +29,72 @@
   font-size: 60%;
 }
 
+[larger] {
+  font-size: 120%;
+}
+
+[largerer] {
+  font-size: 140%;
+}
+
 [flex] {
   display: flex;
+}
+
+[justify-content-space-around]{
   justify-content: space-around;
 }
 
 [half] {
   flex: 0 1 auto;
+}
+
+// book cards
+
+.book-card {
+
+  .book-card-content {
+    display: flex;
+
+    .book-result-img {
+      height: 8rem;
+      width: auto;
+      flex: 0 1 auto;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .book-result-img-alt {
+      height: 8rem;
+      width: 5.7rem;
+      flex: 0 1 auto;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      text-align: center;
+      font-size: 6rem;
+      color: rgba(0,0,0,0.32);
+    }
+
+    .book-info {
+      flex: 0 1 auto;
+      padding-left: 1rem;
+      h2 {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// search-books
+.search-books {
+  .hidden {
+    visibility: hidden;
+  }
+
+  ion-spinner {
+    height: 1.3rem;
+    width: 100%;
+  }
+
+  .book-card {
+    margin-top:0;
+  }
 }

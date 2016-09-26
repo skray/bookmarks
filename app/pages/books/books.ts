@@ -1,6 +1,7 @@
 import {Component} from '@angular/core'
 import {ModalController, NavController} from 'ionic-angular'
-import {EditBookModal} from './edit-book'
+import {EditBookPage} from './edit-book'
+import {SearchBooksPage} from './search-books'
 import {Book} from '../../models/Book'
 import * as storager from '../../services/storager'
 import {BookList} from '../../components/book-list'
@@ -15,7 +16,11 @@ export class BooksPage {
   public filteredBooks: Array<Book>
   public readFilterValue:string = 'unread'
 
-  constructor(public nav: NavController, public modalCtrl:ModalController) {
+  constructor(
+    public navCtrl: NavController
+  ) {}
+
+  ionViewDidEnter() {
     this.loadBooks()
   }
 
@@ -34,12 +39,12 @@ export class BooksPage {
     })
   }
 
+  addNew() {
+    this.navCtrl.push(SearchBooksPage)
+  }
+
   showEdit(book: Book) {
-    let modal = this.modalCtrl.create(EditBookModal, {book: book})
-    modal.onDidDismiss(data => {
-      this.loadBooks()
-    })
-    modal.present()
+    this.navCtrl.push(EditBookPage, {book: book})
   }
 
   private filter(readValue:string) {

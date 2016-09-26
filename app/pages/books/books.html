@@ -7,7 +7,7 @@
       Books
     </ion-title>
     <ion-buttons end>
-      <button (click)="showEdit()">
+      <button (click)="addNew()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -28,6 +28,6 @@
 </ion-header>
 <ion-content>
   <div *ngIf="filteredBooks">
-    <book-list [books]="filteredBooks" (onDismiss)="loadBooks()"></book-list>    
+    <book-list [books]="filteredBooks" (onDismiss)="loadBooks()"></book-list>
   </div>
 </ion-content>
