@@ -9,6 +9,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <div *ngIf="loadError" largerer text-center margin>
+    <p>There was an error loading your backup. Please try again later.</p>
+    <p>If this issue persists, please ensure that you have not edited the files in Apps/Bookmarks Mobile App, or if you have, to revert any changes.</p>
+  </div>
   <div *ngIf="backup">
     <div flex justify-content-space-around>
       <button half (click)="restore()">Restore Items</button>
