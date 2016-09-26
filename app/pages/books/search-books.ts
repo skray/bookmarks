@@ -15,6 +15,7 @@ export class SearchBooksPage {
 
   public results:Array<GoogleBookSearchResult>
   public searching:boolean = false
+  public errored:boolean = false
   public searchStr:string
 
   constructor(
@@ -25,6 +26,7 @@ export class SearchBooksPage {
   }
 
   public searchBooks(evt:any) {
+    this.errored = false
     if(!this.searchStrEmpty()) {
       this.searching = true
       this.googlebooks.searchBooks(this.searchStr).subscribe(
@@ -34,8 +36,8 @@ export class SearchBooksPage {
         },
         (error:Response) =>  {
           this.searching = false
-          console.log('Error')
-          console.log(error)
+          this.errored = true
+          console.log('Error searching for books')
           console.log(error.status)
           console.log(error.text())
         }

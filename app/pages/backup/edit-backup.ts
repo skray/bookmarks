@@ -18,6 +18,7 @@ export class EditBackupPage {
 
   public backup:Backup
   public file:Entry
+  public loadError:boolean = false
 
   constructor(
     public dropbox: Dropbox,
@@ -49,12 +50,6 @@ export class EditBackupPage {
       buttons: [
         { text: 'No' },
         { text: 'Yes', handler: () => {
-          let loading = this.loadingCtrl.create({
-            content: 'Deleting...',
-            dismissOnPageChange: true
-          })
-          // loading.present()
-
           let navTransition = confirm.dismiss()
 
           this.dropbox.delete(this.file).subscribe(
@@ -62,7 +57,15 @@ export class EditBackupPage {
               navTransition.then(() => this.navCtrl.pop())
             },
             (error:Response) =>  {
-              console.log('Error')
+              navTransition.then(() => {
+                let alert = this.alertCtrl.create({
+                  title: 'Error',
+                  subTitle: 'There was an error deleting your backup. Please try again later',
+                  buttons: ['OK']
+                })
+                alert.present()
+              })
+              console.log('Error deleting backup')
               console.log(error.status)
               console.log(error.text())
             }
@@ -109,7 +112,8 @@ export class EditBackupPage {
         this.backup = backup
       },
       (error:Response) =>  {
-        console.log('Error')
+        this.loadError = true
+        console.log('Error loading backup')
         console.log(error.status)
         console.log(error.text())
       }
