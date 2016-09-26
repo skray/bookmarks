@@ -37,6 +37,7 @@ export class SearchBooksPage {
         (error:Response) =>  {
           this.searching = false
           this.errored = true
+          console.log('Error searching for books')
           console.log(error.status)
           console.log(error.text())
         }
