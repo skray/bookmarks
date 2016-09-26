@@ -1,13 +1,8 @@
-
-
 import {Component} from '@angular/core';
 import {Platform, ionicBootstrap, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {BooksPage} from './pages/books/books';
 import {BackupRestorePage} from './pages/backup/backup-restore';
-
-import { provide } from '@angular/core';
-provide(Window, { useValue: window });
 
 @Component({
   template: `
