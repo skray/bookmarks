@@ -1,8 +1,9 @@
-import {Alert, NavController} from 'ionic-angular';
+import {Alert, NavController, ActionSheetController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {NavParams, AlertController} from 'ionic-angular';
 import {Book} from '../../models/Book';
 import * as storager from '../../services/storager';
+import {SearchBooksPage} from './search-books'
 
 @Component({
   templateUrl: './build/pages/books/edit-book.html'
@@ -14,7 +15,8 @@ export class EditBookPage {
   constructor(
       public params: NavParams,
       public navCtrl: NavController,
-      private alertCtrl: AlertController
+      private alertCtrl: AlertController,
+      public actionSheetCtrl: ActionSheetController
   ) {
     if(params.get('book')) {
       this.book = params.get('book');
@@ -58,5 +60,29 @@ export class EditBookPage {
       ]
     });
     confirm.present();
+  }
+
+  public more() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'More actions',
+      buttons: [
+        {
+          text: 'Redo book search',
+          handler: () => {
+            actionSheet.dismiss().then(() => this.navCtrl.push(SearchBooksPage, {book: this.book}))
+          }
+        },{
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            actionSheet.dismiss().then(() => this.promptForDelete())
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }

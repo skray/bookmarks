@@ -15,8 +15,7 @@ export class Book {
   read:boolean;
   created:Date;
 
-  constructor(fields?:any) {
-    Object.assign(this,fields)
+  constructor() {
     this.created = new Date();
   }
 }

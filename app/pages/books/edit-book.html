@@ -3,16 +3,18 @@
     <ion-title>
       Edit Book
     </ion-title>
-    <ion-buttons start>
-      <button (click)="dismiss()">
-        <span primary showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-      </button>
+    <ion-buttons>
+
     </ion-buttons>
     <ion-buttons end>
+      <button (click)="dismiss()">
+        <span primary><ion-icon name="md-close"></ion-icon> Cancel</span>
+      </button>
       <button (click)="save()">
-        <span primary showWhen="ios">Save</span>
-        <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+        <span primary><ion-icon name="md-checkmark"></ion-icon> Save</span>
+      </button>
+      <button (click)="more()">
+        <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -81,6 +83,4 @@
     </ion-item>
 
   </ion-list>
-
-  <button *ngIf="!flags.creating" danger full (click)="promptForDelete()">DELETE</button>
 </ion-content>

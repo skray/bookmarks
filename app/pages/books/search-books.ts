@@ -1,6 +1,6 @@
 import {Component} from '@angular/core'
 import {Response} from '@angular/http'
-import {NavController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
 import {GoogleBooks} from '../../services/googlebooks'
 import {GoogleBookSearchResult} from '../../models/GoogleBookSearchResult'
@@ -17,12 +17,17 @@ export class SearchBooksPage {
   public searching:boolean = false
   public errored:boolean = false
   public searchStr:string
+  public book:Book
 
   constructor(
     public googlebooks:GoogleBooks,
-    public navCtrl:NavController
+    public navCtrl:NavController,
+    public navParams:NavParams
   ) {
     this.results = new Array<GoogleBookSearchResult>()
+    if(navParams.get('book')) {
+      this.book = navParams.get('book')
+    }
   }
 
   public searchBooks(evt:any) {
@@ -51,8 +56,12 @@ export class SearchBooksPage {
     return typeof this.searchStr !== 'string' || this.searchStr.length <= 0
   }
 
-  public choose(book:GoogleBookSearchResult) {
-    this.navCtrl.push(EditBookPage, {book: new Book(book)})
+  public choose(searchResult:GoogleBookSearchResult) {
+    if(!this.book) {
+      this.book = new Book()
+    }
+    Object.assign(this.book, searchResult)
+    this.navCtrl.push(EditBookPage, {book: this.book})
   }
 
 }
